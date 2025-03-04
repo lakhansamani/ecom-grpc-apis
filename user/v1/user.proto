@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "github.com/lakhansamani/ecom-grpc-apis/user/v1";
+
+// User Service definition
+service UserService {
+    // Register API to register a new user
+    // Permission: none
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+    // Login API to login a user
+    // Permission: none
+    rpc Login(LoginRequest) returns (LoginResponse);
+    // Me API to get user details
+    // Permission: authenticated user
+    rpc Me(MeRequest) returns (MeResponse);
+}
+
+// User model
+message User {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+}
+  
+// Register API
+message RegisterRequest {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+}
+  
+message RegisterResponse {
+    string user_id = 1;
+}
+  
+// Login API
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+  
+message LoginResponse {
+    string token = 1;
+}
+  
+// Me API (token will be taken from gRPC metadata)
+message MeRequest {}
+  
+message MeResponse {
+    User user = 1;
+}
