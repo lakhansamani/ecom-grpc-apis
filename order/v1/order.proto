@@ -26,7 +26,6 @@ message Order {
 message CreateOrderRequest {
     string product = 2;
     int32 quantity = 3;
-    double price = 4;
 }
 
 // CreateOrder response API
